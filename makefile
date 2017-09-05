@@ -6,7 +6,7 @@
 #    By: adeletan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/16 07:30:41 by adeletan          #+#    #+#              #
-#    Updated: 2017/09/02 03:07:58 by adeletan         ###   ########.fr        #
+#    Updated: 2017/09/05 07:10:04 by lmenigau         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,11 @@ NAME := wolf3d
 
 LIBFT = libft/libft.a
 
-FLAGS := -L./minilibx -lmlx -framework OpenGl -framework AppKit
-INCLUDES := -I./minilibx -I./includes
+FLAGS := -L./minilibx -lmlx -framework OpenGl -framework AppKit -g3 -fsanitize=address
+INCLUDES := -I./minilibx -I./includes -I./libft
 
-SRCS := main.c			
+SRCS := main.c \
+		ft_parse.c
 
 SRCSP := $(addprefix ./srcs/,  $(SRCS))
 OBJS = $(SRCS:.c=.o)
