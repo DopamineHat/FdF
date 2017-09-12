@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_parse.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/12 10:13:58 by rpagot            #+#    #+#             */
+/*   Updated: 2017/09/12 10:47:55 by rpagot           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 static int	count_lines(char *str)
@@ -7,7 +19,7 @@ static int	count_lines(char *str)
 	int		cnt;
 
 	cnt = 0;
-	if ((fd = open(str , O_RDONLY)) < 0)
+	if ((fd = open(str, O_RDONLY)) < 0)
 		return (-1);
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -26,7 +38,7 @@ static	void	atoi_tab(int **array, char **tab)
 	while (tab[index])
 		++index;
 	*array = (int*)malloc(sizeof(int) * (index + 1));
-	bzero((void*)(*array), (index+1) * sizeof(int));
+	bzero((void*)(*array), (index + 1) * sizeof(int));
 	index = 0;
 	while (tab[index])
 	{
@@ -47,7 +59,7 @@ t_map	*ft_parsemap(char *str)
 	if (!(map = (t_map*)malloc(sizeof(t_map))))
 		return (map);
 	map->data = (int**)malloc(sizeof(int*) * (count_lines(str) + 1));
-	if ((fd = open(str , O_RDONLY)) > 0)
+	if ((fd = open(str, O_RDONLY)) > 0)
 	{
 		while (get_next_line(fd, &line) > 0)
 		{
@@ -56,7 +68,7 @@ t_map	*ft_parsemap(char *str)
 			free(line);
 			ft_doublefree(tab, &free);
 			++i;
-		}	
+		}
 	}
 	map->data[i] = NULL;
 	return (map);

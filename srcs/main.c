@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/02 03:04:19 by adeletan          #+#    #+#             */
-/*   Updated: 2017/09/05 07:27:57 by lmenigau         ###   ########.fr       */
+/*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
+/*   Updated: 2017/09/12 12:11:49 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ int		main(int argc, char **argv)
 		return (1);
 	}
 	map = ft_parsemap(argv[1]);
-	int index;
-	int index2;
+	int i;
+	int i2;
 
-	index = 0;
-	index2 = 0;
-	while(map->data[index])
+	i = 0;
+	i2 = 0;
+	while(map->data[i])
 	{
-		while (map->data[index][index2] > 0)
+		while (map->data[i][i2] > 0)
 		{
-			printf("%d ", map->data[index][index2]);
-			++index2;
+			printf("%d ", map->data[i][i2]);
+			++i2;
 		}
 		printf("\n");
-		++index;
-		index2 = 0;
+		++i;
+		i2 = 0;
 	}
 	return (0);
 }
