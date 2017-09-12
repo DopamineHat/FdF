@@ -61,5 +61,3 @@ t_map	*ft_parsemap(char *str)
 	map->data[i] = NULL;
 	return (map);
 }
-			
-			

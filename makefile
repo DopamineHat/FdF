@@ -6,11 +6,11 @@
 #    By: adeletan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/16 07:30:41 by adeletan          #+#    #+#              #
-#    Updated: 2017/09/05 07:10:04 by lmenigau         ###   ########.fr        #
+#    Updated: 2017/09/12 09:36:06 by rpagot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := wolf3d
+NAME := fdf
 
 LIBFT = libft/libft.a
 
