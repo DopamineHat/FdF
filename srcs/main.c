@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/12 12:11:49 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/09/13 13:28:34 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@ int		main(int argc, char **argv)
 		++i;
 		i2 = 0;
 	}
+
+	if (!(map->mlx = mlx_init()))
+	  return (0);
+	ft_map_display(map);
 	return (0);
 }

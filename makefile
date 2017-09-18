@@ -6,7 +6,7 @@
 #    By: adeletan <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/16 07:30:41 by adeletan          #+#    #+#              #
-#    Updated: 2017/09/12 09:36:06 by rpagot           ###   ########.fr        #
+#    Updated: 2017/09/12 16:11:11 by rpagot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ FLAGS := -L./minilibx -lmlx -framework OpenGl -framework AppKit -g3 -fsanitize=a
 INCLUDES := -I./minilibx -I./includes -I./libft
 
 SRCS := main.c \
-		ft_parse.c
+		ft_parse.c \
+		ft_map.c
 
 SRCSP := $(addprefix ./srcs/,  $(SRCS))
 OBJS = $(SRCS:.c=.o)
