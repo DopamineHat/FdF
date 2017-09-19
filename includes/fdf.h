@@ -16,7 +16,16 @@ typedef struct	s_map
 		void	*image;
 		char	*addr;
 		int		**data;
-
+		int		signx;
+		int		signy;
+		int		d;
+		int		d2;
+		int		x1;
+		int		y1;
+		int		x2;
+		int		y2;
+		int		mx;
+		int		my;
 }				t_map;
 
 t_map		*ft_parsemap(char *str);
