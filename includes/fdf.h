@@ -11,6 +11,8 @@
 
 typedef struct	s_map
 {
+		int		width;
+		int		length;
 		void	*mlx;
 		void	*win;
 		void	*image;
@@ -26,9 +28,14 @@ typedef struct	s_map
 		int		y2;
 		int		mx;
 		int		my;
+		int		sizex;
+		int		error;
+		int		xn;
+		int		widthx;
+		int		yn;
 }				t_map;
 
-t_map		*ft_parsemap(char *str);
+t_map		*ft_parsemap(char *str, t_map *map);
 void		ft_map_display(t_map *map);
 
 #endif
