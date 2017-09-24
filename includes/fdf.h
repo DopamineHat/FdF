@@ -17,7 +17,7 @@ typedef struct	s_map
 		void	*win;
 		void	*image;
 		char	*addr;
-		int		**data;
+		int		*data;
 		int		signx;
 		int		signy;
 		int		d;
@@ -29,6 +29,7 @@ typedef struct	s_map
 		int		mx;
 		int		my;
 		int		sizex;
+		int		sizey;
 		int		error;
 		int		xn;
 		int		widthx;

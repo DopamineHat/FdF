@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 16:08:32 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/24 13:48:39 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/09/24 13:27:56 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,39 @@
 
 static	void				ft_set_pointsx(t_map *map)
 {
-	map->x1 = map->xn * map->widthx;
-	map->y1 = map->widthx * map->yn - map->data[map->xn + (map->yn) * (map->sizex - 1) - 1];
-	map->x2 = (map->xn + 1) * map->widthx;
-	map->y2 = map->widthx * map->yn - map->data[map->xn + (map->yn) * (map->sizex - 1) - 1];
+	int sy;
+
+	printf(" %d\n", map->xn + (map->yn - 1) * (map->sizex - 1) - 1);
+	printf(" %d\n", map->data[map->xn + (map->yn - 1) * (map->sizex - 1) - 1]);
+	sy = map->yn * map->widthx;
+	map->x1 = sy * 2 - ((map->xn - 1) * map->widthx) * 2;
+	map->y1 = sy
+		+ ((map->xn - 1) * map->widthx)
+		- map->data[map->xn + (map->yn - 1) * (map->sizex - 1) - 1] * 5;
+	map->x2 = sy * 2 - ((map->xn * map->widthx) * 2);
+	map->y2 = sy
+		+ (map->xn * map->widthx)
+		- map->data[map->xn + (map->yn - 1) * (map->sizex - 1)] * 5;
 }
 
 static	void				ft_set_pointsy(t_map *map)
 {
-	map->x1 = map->xn * map->widthx;
-	map->y1 = map->widthx * map->yn;
-	map->x2 = map->xn * map->widthx;
-	map->y2 = map->widthx * (map->yn + 1);
+	int sx;
+
+	printf(" %d\n", map->xn + (map->yn - 1) * (map->sizex - 1) - 1);
+	printf(" %d\n", map->data[map->xn + (map->yn - 1) * (map->sizex - 1) - 1]);
+	printf("xn %d\n", map->xn);
+	printf("yn %d\n", map->yn);
+	printf("XD %d\n", map->data[map->xn + (map->yn - 1) * (map->sizex - 1) - 1]);
+	sx = map->xn * map->widthx;
+	map->x1 = (map->widthx * (map->yn - 2)) * 2 - sx * 2;
+	map->y1 = map->widthx * (map->yn - 2)
+		+ sx
+		- map->data[map->xn + (map->yn - 2) * (map->sizex - 1) - 1] * 5;
+	map->x2 = (map->widthx * (map->yn - 1)) * 2 - sx * 2;
+	map->y2 = map->widthx * map->yn
+		+ sx
+		- map->data[map->xn + (map->yn - 1) * (map->sizex - 1) - 1] * 5;
 }
 
 static	void				ft_draw_line(t_map *map)
@@ -61,7 +82,7 @@ static	void				ft_draw_grid(t_map *map)
 {
 	while (map->yn < map->sizey + 1)
 	{
-		while (map->xn < map->sizex + 1)
+		while (map->xn < map->sizex)
 		{
 			ft_set_pointsx(map);
 			ft_draw_line(map);

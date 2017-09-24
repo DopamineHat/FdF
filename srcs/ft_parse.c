@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 10:13:58 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/22 07:49:41 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/09/24 12:25:09 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,23 @@ static int	count_lines(char *str)
 	return (cnt);
 }
 
-static	void	atoi_tab(int **array, char **tab, t_map *map)
+static	void	atoi_tab(char **tab, t_map *map)
 {
-	int index;
+	int i;
+	int n;
 
-	index = 0;
-	while (tab[index])
-		++index;
-	*array = (int*)malloc(sizeof(int) * (index + 1));
-	bzero((void*)(*array), (index + 1) * sizeof(int));
-	index = 0;
-	while (tab[index])
+	i = 0;
+	while (tab[n])
+		++n;
+	ft_bzero((void*)(&(map->data[map->sizey * n])), (i + 1) * sizeof(int));
+	i = 0;
+	while (tab[i])
 	{
-		(*array)[index] = ft_atoi(tab[index]);
-		++index;
+		printf("%d\n", map->sizey * n + i);
+		map->data[map->sizey * n + i] = ft_atoi(tab[i]);
+		++i;
 	}
-	ft_set_sizex(map, index);
+	ft_set_sizex(map, i);
 }
 
 t_map	*ft_parsemap(char *str, t_map *map)
@@ -66,21 +67,20 @@ t_map	*ft_parsemap(char *str, t_map *map)
 	int		fd;
 	int		i;
 
-	map->sizex = 0;
 	map->error = 0;
 	i = 0;
-	map->data = (int**)malloc(sizeof(int*) * (count_lines(str) + 1));
+	map->data = (int*)malloc(sizeof(int) * (count_lines(str) + 1));
 	if ((fd = open(str, O_RDONLY)) > 0)
 	{
 		while (get_next_line(fd, &line) > 0)
 		{
 			tab = ft_strsplit(line, ' ');
-			atoi_tab(&(map->data[i]), tab, map);
+			atoi_tab(tab, map);
 			free(line);
 			ft_doublefree(tab, &free);
 			++i;
+			map->sizey = i;
 		}
 	}
-	map->data[i] = NULL;
 	return (map);
 }
