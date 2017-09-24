@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/23 09:25:53 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/09/24 16:15:44 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_set_values(t_map *map)
 {
-	map->width = 1000;
-	map->length = 1000;
+	map->width = 500;
+	map->length = 500;
 	map->xn = 1;
 	map->yn = 1;
 	map->sizex = 0;
