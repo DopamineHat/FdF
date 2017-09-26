@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 10:13:58 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/24 12:25:09 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/09/25 22:47:19 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,6 @@ static t_map	*ft_set_sizex(t_map *map, int i)
 	return (map);
 }
 
-static int	count_lines(char *str)
-{
-	int 	fd;
-	char	*line;
-	int		cnt;
-
-	cnt = 0;
-	if ((fd = open(str, O_RDONLY)) < 0)
-		return (-1);
-	while (get_next_line(fd, &line) > 0)
-	{
-		free(line);
-		++cnt;
-	}
-	close(fd);
-	return (cnt);
-}
-
 static	void	atoi_tab(char **tab, t_map *map)
 {
 	int i;
@@ -49,11 +31,9 @@ static	void	atoi_tab(char **tab, t_map *map)
 	i = 0;
 	while (tab[n])
 		++n;
-	ft_bzero((void*)(&(map->data[map->sizey * n])), (i + 1) * sizeof(int));
-	i = 0;
 	while (tab[i])
 	{
-		printf("%d\n", map->sizey * n + i);
+		//printf("%d\n", map->sizey * n + i);
 		map->data[map->sizey * n + i] = ft_atoi(tab[i]);
 		++i;
 	}
@@ -69,9 +49,12 @@ t_map	*ft_parsemap(char *str, t_map *map)
 
 	map->error = 0;
 	i = 0;
-	map->data = (int*)malloc(sizeof(int) * (count_lines(str) + 1));
+	// tab = (char**)malloc(50000 * (count_lines(str) + 1) * 2);
 	if ((fd = open(str, O_RDONLY)) > 0)
 	{
+		off_t size = lseek(fd, 0, SEEK_END);
+		map->data = (int *)malloc(size * sizeof(int));
+		off_t begin = lseek(fd, 0, SEEK_SET);
 		while (get_next_line(fd, &line) > 0)
 		{
 			tab = ft_strsplit(line, ' ');
@@ -82,5 +65,6 @@ t_map	*ft_parsemap(char *str, t_map *map)
 			map->sizey = i;
 		}
 	}
+	printf("helooooo");
 	return (map);
 }

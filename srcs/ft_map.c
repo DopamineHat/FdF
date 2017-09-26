@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 16:08:32 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/24 16:27:53 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/09/26 03:48:09 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,28 @@
 static	void				ft_set_pointsx(t_map *map)
 {
 	map->x1 = map->xn * map->widthx - map->yn * map->widthx;
-	map->y1 = map->widthx * map->yn + map->xn * map->widthx
-		- map->data[map->xn + (map->yn - 1) * map->sizex - 1] * 4;
-	printf("%d\n", map->xn + (map->yn - 1) * (map->sizex));
+	map->y1 = (map->widthx * map->yn + map->xn * map->widthx) * map->zoom / 2
+		- (map->data[map->xn + (map->yn - 1) * map->sizex - 1]
+				* 8 / map->zoom);
+//	printf("%d\n", map->xn + (map->yn - 1) * (map->sizex));
 	map->x2 = (map->xn + 1) * map->widthx - map->yn * map->widthx;
-	map->y2 = map->widthx * map->yn + (map->xn + 1) * map->widthx 
-		- map->data[map->xn + (map->yn - 1) * map->sizex] * 4;
+	map->y2 = (map->widthx * map->yn + (map->xn + 1) * map->widthx)
+		* map->zoom / 2
+		- (map->data[map->xn + (map->yn - 1) * map->sizex]
+				* 8 / map->zoom);
 }
 
 static	void				ft_set_pointsy(t_map *map)
 {
 	map->x1 = map->xn * map->widthx - map->yn * map->widthx;
-	printf("%d\n", map->xn + (map->yn) * (map->sizex) - 1);
-	map->y1 = map->widthx * map->yn + map->xn * map->widthx - map->data[map->xn + (map->yn - 1) * map->sizex - 1] * 4;
+//	printf("%d\n", map->xn + (map->yn) * (map->sizex) - 1);
+	map->y1 = (map->widthx * map->yn + map->xn * map->widthx) * map->zoom / 2
+		- (map->data[map->xn + (map->yn - 1) * map->sizex - 1]
+				* 8 / map->zoom);
 	map->x2 = map->xn * map->widthx - (map->yn + 1) * map->widthx;
-	map->y2 = map->widthx * (map->yn + 1) + map->xn * map->widthx - map->data[map->xn + map->yn * map->sizex - 1] * 4;
+	map->y2 = (map->widthx * (map->yn + 1) + map->xn * map->widthx)
+		* map->zoom / 2
+		- (map->data[map->xn + map->yn * map->sizex - 1] * 8 / map->zoom);
 }
 
 static	void				ft_draw_line(t_map *map)
@@ -44,7 +51,7 @@ static	void				ft_draw_line(t_map *map)
 	map->d = map->mx + map->my;
 	while (map->x1 + map->y1 * map->width < map->width * map->length * 2)
 	{
-		addr[map->x1 + map->y1 * map->width * 2 - map->width] = 0x00FFFFFF;
+		addr[map->x1 + map->sizex + (map->y1 + map->sizex * 3) * map->width * 2 - map->width] = 0x00FFFFFF;
 		if (map->x1 + map->y1 * map->width == map->x2 + map->y2 * map->width)
 			break ;
 		map->d2 = map->d * 2;
@@ -63,6 +70,7 @@ static	void				ft_draw_line(t_map *map)
 
 static	void				ft_draw_grid(t_map *map)
 {
+	printf("draw_grid");
 	while (map->yn < map->sizey + 1)
 	{
 		while (map->xn < map->sizex)
@@ -86,25 +94,23 @@ static	void				ft_draw_grid(t_map *map)
 		map->yn = 1;
 		map->xn++;
 	}
+	printf("draw_grid_end1");
 }
 
 void						ft_map_display(t_map *map)
 {
-	int	bits_per_pixel;
-	int	size_line;
-	int	endian;
-	int	*addr;
-
-	map->widthx = map->width / (map->sizex + 1);
-	printf("%d \n", map->widthx);
-	if (!(map->win = mlx_new_window(map->mlx, map->length * 2, map->width * 2, "FdF")))
+	printf("helooooo!!!!!!!!!!!!!!!!!!!!!\n");
+	map->widthx = map->width * 2 / ((map->sizex + 1) * 1.5 * map->zoom);
+	printf("%d \n", map->length);
+	printf("%p \n", map->mlx);
+	if (!(map->image = mlx_new_image(map->mlx, map->width * map->zoom,
+					map->length * map->zoom)))
 		return ;
-	if (!(map->image = mlx_new_image(map->mlx, map->length * 2, map->width * 2)))
-		return ;
-	map->addr = mlx_get_data_addr(map->image, &bits_per_pixel,
-			&size_line, &endian);
-	addr = (int *)map->addr;
+	map->addr = mlx_get_data_addr(map->image, &map->bpp,
+			&map->size_line, &map->endian);
+	printf("helooooo!!!!!!!!!!!!!!!!!!!!!\n");
 	ft_draw_grid(map);
+	printf("coucou\n");
 	mlx_put_image_to_window(map->mlx, map->win, map->image, 0, 0);
 	mlx_loop(map->mlx);
 }

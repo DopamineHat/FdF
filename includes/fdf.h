@@ -16,6 +16,9 @@ typedef struct	s_map
 		void	*mlx;
 		void	*win;
 		void	*image;
+		int		bpp;
+		int		endian;
+		int		size_line;
 		char	*addr;
 		int		*data;
 		int		signx;
@@ -34,6 +37,7 @@ typedef struct	s_map
 		int		xn;
 		int		widthx;
 		int		yn;
+		int		zoom;
 }				t_map;
 
 t_map		*ft_parsemap(char *str, t_map *map);
