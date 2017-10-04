@@ -6,12 +6,11 @@
 /*   By: ede-sous <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/30 07:31:05 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/03/20 05:20:25 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/10/03 18:15:59 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static void		change_line(char **tmp, char **stock, char *test, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 16:08:32 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/29 18:46:18 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/04 03:44:59 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,4 @@ void						ft_map_display(t_map *map)
 			&map->size_line, &map->endian);
 	ft_draw_grid(map);
 	mlx_put_image_to_window(map->mlx, map->win, map->image, 0, 0);
-	mlx_loop(map->mlx);
 }

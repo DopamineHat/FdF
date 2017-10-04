@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/29 18:15:17 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/04 03:49:59 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,17 @@ void	ft_set_values(t_map *map)
 			map->length * 2, "FdF");
 }
 
+int		ft_hook_escape(int key, t_map *map)
+{
+	if(key == KEY_ESCAPE)
+	{
+		mlx_destroy_window(map->mlx, map->win);
+		free(map);
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
+}
+
 int		main(int argc, char **argv)
 {
 	t_map	*map;
@@ -42,5 +53,7 @@ int		main(int argc, char **argv)
 	ft_set_values(map);
 	ft_parsemap(argv[1], map);
 	ft_map_display(map);
+	mlx_hook(map->win, KEYPRESS, KEYRELEASE, &ft_hook_escape, map);
+	mlx_loop(map->mlx);
 	return (0);
 }

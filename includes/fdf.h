@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 18:47:28 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/29 18:48:11 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/04 03:47:01 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <string.h>
 
 # include "libft.h"
+# include "key_codes_macos.h"
+# include "events.h"
 
 typedef struct	s_map
 {
