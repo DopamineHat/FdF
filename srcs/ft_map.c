@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 16:08:32 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/05 12:52:29 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/05 21:26:55 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static	void				ft_draw_line(t_map *map)
 	map->signx = map->x1 < map->x2 ? 1 : -1;
 	map->signy = map->y1 < map->y2 ? 1 : -1;
 	map->d = map->mx + map->my;
-	while (map->x1 + (map->y1 + map->sizex) * map->width * 2
-			- map->width < map->width * map->length * 4
+	while (map->x1 + (map->y1 + map->sizex) * (map->width + map->posy) * 2
+			- map->width + map->posx < map->width * map->length * 4
 			&& map->x1 > -map->width
 			&& (map->x1 + (map->y1 + map->sizex + map->posy * 2) * map->width * 2
 			- map->width) > 0)
