@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 10:13:58 by rpagot            #+#    #+#             */
-/*   Updated: 2017/09/29 18:28:43 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/04 06:47:51 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,14 @@ t_map			*ft_parsemap(char *str, t_map *map)
 	int		i;
 	off_t	size;
 
+	size = 0;
 	map->error = 0;
 	i = 0;
 	if ((fd = open(str, O_RDONLY)) > 0)
-	{
-		size = lseek(fd, 0, SEEK_END);
+		while (get_next_line(fd, &line) > 0)
+			size += ft_strlen(line);
 		map->data = (int *)malloc(size * sizeof(int));
-		lseek(fd, 0, SEEK_SET);
+	if ((fd = open(str, O_RDONLY)) > 0)
 		while (get_next_line(fd, &line) > 0)
 		{
 			tab = ft_strsplit(line, ' ');
@@ -64,6 +65,5 @@ t_map			*ft_parsemap(char *str, t_map *map)
 			++i;
 			map->sizey = i;
 		}
-	}
 	return (map);
 }

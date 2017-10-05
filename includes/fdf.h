@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 18:47:28 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/04 03:47:01 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/04 10:17:26 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,14 @@
 
 typedef struct	s_map
 {
+	int		posx;
+	int		posy;
 	int		width;
 	int		length;
 	void	*mlx;
 	void	*win;
 	void	*image;
+	void	*blackscreen;
 	int		bpp;
 	int		endian;
 	int		size_line;
@@ -51,10 +54,12 @@ typedef struct	s_map
 	int		widthx;
 	int		yn;
 	int		zoom;
+	int		zratio;
 }				t_map;
 
 t_map			*ft_parsemap(char *str, t_map *map);
 void			ft_map_display(t_map *map);
 void			ft_process_line(t_map *map);
+int				ft_hook_keys(int key, t_map *map);
 
 #endif
