@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adeletan <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/03/16 07:30:41 by adeletan          #+#    #+#              #
-#    Updated: 2017/09/29 18:42:45 by rpagot           ###   ########.fr        #
+#    Created: 2017/10/06 01:11:02 by rpagot            #+#    #+#              #
+#    Updated: 2017/10/06 01:12:09 by rpagot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ INCLUDES := -I./minilibx_macos -I./includes -I./libft -framework OpenGl \
 SRCS := main.c \
 		ft_parse.c \
 		ft_map.c \
-		ft_process_line.c
+		ft_process_line.c \
+		ft_hook_keys.c
 
 SRCSP := $(addprefix ./srcs/,  $(SRCS))
 OBJS = $(SRCS:.c=.o)
