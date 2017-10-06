@@ -3,32 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bait-sli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/22 21:42:05 by adeletan          #+#    #+#             */
-/*   Updated: 2016/12/06 13:26:10 by adeletan         ###   ########.fr       */
+/*   Created: 2016/11/11 18:26:50 by bait-sli          #+#    #+#             */
+/*   Updated: 2016/11/19 06:29:43 by bait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2, int flag)
+char		*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*ret;
-	size_t	len;
+	char	*dest;
+	int		len;
 
 	if (!s1 || !s2)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	if ((ret = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
+	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	dest = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dest)
 		return (NULL);
-	ft_strcpy(ret, s1);
-	*(ret + ft_strlen(s1)) = '\0';
-	ft_strcat(ret, s2);
-	*(ret + len) = '\0';
-	if (flag == 1 || flag == 4)
-		ft_strdel((char**)&s1);
-	if (flag == 2 || flag == 4)
-		ft_strdel((char**)&s2);
-	return (ret);
+	ft_strcpy(dest, s1);
+	ft_strcat(dest, s2);
+	return (dest);
 }

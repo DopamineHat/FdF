@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/04 05:26:07 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/04 11:02:45 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/06 08:35:16 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void		ft_reset_values(t_map *map)
 	mlx_destroy_image(map->mlx, map->image);
 }
 
-static int	ft_hook_keys4(int key, t_map *map)
+static int		ft_hook_keys4(int key, t_map *map)
 {
 	if (key == KEY_DOWN)
 	{
@@ -36,7 +36,7 @@ static int	ft_hook_keys4(int key, t_map *map)
 	return (0);
 }
 
-static int	ft_hook_keys3(int key, t_map *map)
+static int		ft_hook_keys3(int key, t_map *map)
 {
 	if (key == KEY_S)
 	{
@@ -46,8 +46,6 @@ static int	ft_hook_keys3(int key, t_map *map)
 				0, 0);
 		map->posy += 10;
 		ft_map_display(map);
-//		mlx_put_image_to_window(map->mlx, map->win, map->image,
-//				map->posx, map->posy);
 	}
 	if (key == KEY_UP)
 	{
@@ -62,7 +60,7 @@ static int	ft_hook_keys3(int key, t_map *map)
 	return (0);
 }
 
-static int	ft_hook_keys2(int key, t_map *map)
+static int		ft_hook_keys2(int key, t_map *map)
 {
 	if (key == KEY_A)
 	{
@@ -71,8 +69,6 @@ static int	ft_hook_keys2(int key, t_map *map)
 		mlx_put_image_to_window(map->mlx, map->win, map->blackscreen,
 				0, 0);
 		map->posx -= 10;
-//		mlx_put_image_to_window(map->mlx, map->win,
-//				map->image, map->posx, map->posy);
 		ft_map_display(map);
 	}
 	if (key == KEY_W)
@@ -82,17 +78,15 @@ static int	ft_hook_keys2(int key, t_map *map)
 		mlx_put_image_to_window(map->mlx, map->win, map->blackscreen,
 				0, 0);
 		map->posy -= 10;
-//		mlx_put_image_to_window(map->mlx, map->win, map->image,
-//				map->posx, map->posy);
 		ft_map_display(map);
 	}
 	ft_hook_keys3(key, map);
 	return (0);
 }
 
-int		ft_hook_keys(int key, t_map *map)
+int				ft_hook_keys(int key, t_map *map)
 {
-	if(key == KEY_ESCAPE)
+	if (key == KEY_ESCAPE)
 	{
 		mlx_destroy_window(map->mlx, map->win);
 		free(map);
@@ -111,8 +105,6 @@ int		ft_hook_keys(int key, t_map *map)
 		mlx_put_image_to_window(map->mlx, map->win, map->blackscreen,
 				0, 0);
 		map->posx += 10;
-//		mlx_put_image_to_window(map->mlx, map->win, map->image,
-//				map->posx, map->posy);
 		ft_map_display(map);
 	}
 	ft_hook_keys2(key, map);

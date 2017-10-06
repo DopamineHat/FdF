@@ -3,104 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ede-sous <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bait-sli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 07:31:05 by ede-sous          #+#    #+#             */
-/*   Updated: 2017/10/03 18:15:59 by rpagot           ###   ########.fr       */
+/*   Created: 2017/01/24 12:46:20 by bait-sli          #+#    #+#             */
+/*   Updated: 2017/02/02 16:22:22 by bait-sli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void		change_line(char **tmp, char **stock, char *test, int i)
+static int			ft_check_stock(char **stock, char **line)
 {
-	char	*map;
+	char			*tmp;
 
-	if (*stock[0] != '\0')
-		free(*stock);
-	map = ft_strsub(test, (i + 1), (ft_strlen(test) - i - 1));
-	test[i] = '\0';
-	free(*tmp);
-	*tmp = ft_strdup(test);
-	*stock = ft_strdup(map);
-	free(map);
-	free(test);
-}
-
-static int		check_line(char **tmp, char **stock, int y)
-{
-	int		i;
-	char	*test;
-
-	i = -1;
-	test = ft_strjoin(*stock, *tmp, 0);
-	while (test[++i] != '\0')
-		if (test[i] == '\n')
+	tmp = NULL;
+	if (*stock)
+	{
+		if ((tmp = ft_strchr((const char*)*stock, '\n')))
 		{
-			change_line(tmp, stock, test, i);
+			*line = ft_strsub((char const*)*stock, 0, tmp - *stock);
+			ft_memmove(*stock, tmp + 1, ft_strlen(tmp));
 			return (1);
 		}
-	if (y == 0 && test[0] != '\0')
-	{
-		free(*tmp);
-		*tmp = ft_strdup(test);
-		free(test);
-		*stock = "";
-		return (1);
 	}
-	free(test);
 	return (0);
 }
 
-static int		get_line(int fd, char **tmp)
+static	int			cpy_fd_in_stock(int fd, char **stock, char **line)
 {
-	int		ret;
-	char	buff[BUFF_SIZE + 2];
-	char	*bonga;
-	char	*test;
+	char			buf[BUFF_SIZE + 1];
+	int				ret;
+	char			*tmp;
 
-	if ((ret = read(fd, buff, BUFF_SIZE)) == -1)
-		return (-1);
-	bonga = buff;
-	if (ret < BUFF_SIZE && ret != 0 && bonga[ret - 1] != '\n')
+	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
-		bonga[ret] = '\n';
-		bonga[ret + 1] = '\0';
+		if (ret == -1)
+			return (-1);
+		buf[ret] = '\0';
+		tmp = *stock;
+		if (*stock)
+		{
+			*stock = ft_strjoin((char const*)tmp, (char const*)buf);
+			free(tmp);
+		}
+		else
+			*stock = ft_strdup((const char*)buf);
+		if (ft_check_stock(stock, line))
+			return (1);
 	}
-	else
-		bonga[ret] = '\0';
-	test = ft_strjoin(*tmp, bonga, 0);
-	free(*tmp);
-	*tmp = ft_strdup(test);
-	free(test);
-	if (ret == 0)
-		return (0);
-	return (1);
+	return (0);
 }
 
-int				get_next_line(int fd, char **line)
+int					get_next_line(int const fd, char **line)
 {
-	int				y;
-	char			*tmp;
-	static char		*stock = "";
+	static	char	*ret[FD_VALUE];
+	int				result;
 
-	if (line == NULL || BUFF_SIZE < 1 || BUFF_SIZE > 8385030)
+	if (!line || fd < 0)
 		return (-1);
-	if ((tmp = (char*)malloc(BUFF_SIZE + 1)) == NULL)
-		return (-1);
-	ft_bzero(tmp, BUFF_SIZE);
-	if (stock[0] == '\0')
-		y = get_line(fd, &tmp);
-	else
-		y = 1;
-	while (y == 1 && check_line(&tmp, &stock, y) == 0)
-		if ((y = get_line(fd, &tmp)) == -1)
-			return (-1);
-	if (y == 0)
-		y = check_line(&tmp, &stock, y);
-	*line = ft_strdup(tmp);
-	free(tmp);
-	if (y == 0)
+	if (ret[fd] && ft_check_stock(&ret[fd], line))
+		return (1);
+	result = cpy_fd_in_stock(fd, &ret[fd], line);
+	if (result != 0)
+		return (result);
+	if (ret[fd] == NULL || ret[fd][0] == '\0')
 		return (0);
+	*line = ret[fd];
+	ret[fd] = NULL;
 	return (1);
 }

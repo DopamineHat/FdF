@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 10:13:58 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/04 06:47:51 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/06 08:33:32 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static t_map	*ft_set_sizex(t_map *map, int i)
 {
+	map->error = 0;
 	if (map->sizex != i && map->sizex != 0)
 	{
 		map->error = 1;
@@ -45,25 +46,26 @@ t_map			*ft_parsemap(char *str, t_map *map)
 	char	*line;
 	char	**tab;
 	int		fd;
-	int		i;
 	off_t	size;
 
 	size = 0;
-	map->error = 0;
-	i = 0;
 	if ((fd = open(str, O_RDONLY)) > 0)
 		while (get_next_line(fd, &line) > 0)
+		{
 			size += ft_strlen(line);
-		map->data = (int *)malloc(size * sizeof(int));
+			free(line);
+		}
+	map->data = (int *)malloc(size * sizeof(int));
 	if ((fd = open(str, O_RDONLY)) > 0)
+	{
 		while (get_next_line(fd, &line) > 0)
 		{
 			tab = ft_strsplit(line, ' ');
 			atoi_tab(tab, map);
 			free(line);
-			ft_doublefree(tab, &free);
-			++i;
-			map->sizey = i;
+			ft_doublefree(&tab, &free);
+			map->sizey++;
 		}
+	}
 	return (map);
 }

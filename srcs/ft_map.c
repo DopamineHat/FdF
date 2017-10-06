@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 16:08:32 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/05 21:26:55 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/06 08:38:29 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static	void				ft_set_pointsy(t_map *map)
 	map->x2 = map->xn * map->widthx - (map->yn + 1) * map->widthx;
 	map->y2 = (map->widthx * (map->yn + 1) + map->xn * map->widthx)
 		* 2 / map->zoom
-		- (map->data[map->xn + map->yn * map->sizex - 1] 
+		- (map->data[map->xn + map->yn * map->sizex - 1]
 		* map->zratio / map->zoom);
 }
 
@@ -51,7 +51,8 @@ static	void				ft_draw_line(t_map *map)
 	while (map->x1 + (map->y1 + map->sizex) * (map->width + map->posy) * 2
 			- map->width + map->posx < map->width * map->length * 4
 			&& map->x1 > -map->width
-			&& (map->x1 + (map->y1 + map->sizex + map->posy * 2) * map->width * 2
+			&& (map->x1 + (map->y1 + map->sizex + map->posy * 2)
+			* map->width * 2
 			- map->width) > 0)
 	{
 		addr[map->x1 + (map->y1 + map->sizex + map->posy * 2) * map->width
@@ -64,6 +65,7 @@ static	void				ft_draw_line(t_map *map)
 
 static	void				ft_draw_grid(t_map *map)
 {
+	map->xn = 1;
 	while (map->yn < map->sizey + 1)
 	{
 		while (map->xn < map->sizex)

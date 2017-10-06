@@ -6,7 +6,7 @@
 /*   By: adeletan <adeletan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 23:10:59 by adeletan          #+#    #+#             */
-/*   Updated: 2017/03/14 05:06:28 by adeletan         ###   ########.fr       */
+/*   Updated: 2017/10/06 04:26:20 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "./get_next_line.h"
+# define FD_VALUE 2147483647
 
 char			**ft_arraypop(char **tab, size_t index, int free);
 void			ft_putchar(char c);
@@ -31,7 +32,7 @@ char			*ft_itoa(int n);
 int				ft_atoi(char const *str);
 char			**ft_strsplit(char const *s, char c);
 char			*ft_strtrim(char const *s);
-char			*ft_strjoin(char const *s1, char const *s2, int flag);
+char			*ft_strjoin(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 int				ft_strequ(char const *s1, char const *s2);
 char			*ft_strmapi(char const *s, char (*f) (unsigned int, char));
@@ -82,7 +83,7 @@ void			*ft_realloc(void *ptr, size_t size);
 void			ft_lpause(void);
 void			*ft_error_n(int op, char *str, int ker);
 int				ft_error_0(int op, char *str, int ket);
-void			ft_doublefree(char **s, void (*f)(void *));
+void			ft_doublefree(char ***s, void (*f)(void *));
 char			*ft_strsetnew(size_t size, int c);
 char			*ft_union(char **argv);
 void			ft_sort_array(char *str);
