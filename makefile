@@ -6,7 +6,7 @@
 #    By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/06 01:11:02 by rpagot            #+#    #+#              #
-#    Updated: 2017/10/06 01:12:09 by rpagot           ###   ########.fr        #
+#    Updated: 2017/10/08 05:48:20 by rpagot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,12 @@ NAME := fdf
 
 LIBFT = libft/libft.a
 
-CFLAGS := -L./minilibx_macos -lmlx
+CGLAGS := -Wall -Wextra -Werror -Ofast -march=native
+LCFLAGS := -L./minilibx_macos -lmlx -framework OpenGL \
+		-framework Appkit
 
-INCLUDES := -I./minilibx_macos -I./includes -I./libft -framework OpenGl \
-	-framework Appkit
+
+INCLUDES := -I./minilibx_macos -I./includes -I./libft
 
 SRCS := main.c \
 		ft_parse.c \
@@ -38,7 +40,7 @@ lib :
 
 
 $(NAME): $(OBJS)
-	gcc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
+	gcc $(LCFLAGS) -o $(NAME) $(OBJS) $(LIBFT) $(INCLUDES)
 
 %.o : %.c
 	gcc $(CFLAGS)  $(INCLUDES) -c -o $@ $<
