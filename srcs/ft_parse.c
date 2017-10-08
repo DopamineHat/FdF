@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 10:13:58 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/06 08:33:32 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/08 04:11:03 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static t_map	*ft_set_sizex(t_map *map, int i)
 {
-	map->error = 0;
 	if (map->sizex != i && map->sizex != 0)
 	{
 		map->error = 1;

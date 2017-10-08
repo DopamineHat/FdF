@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 16:08:32 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/06 08:38:29 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/08 04:47:40 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ static	void				ft_draw_line(t_map *map)
 	map->signx = map->x1 < map->x2 ? 1 : -1;
 	map->signy = map->y1 < map->y2 ? 1 : -1;
 	map->d = map->mx + map->my;
-	while (map->x1 + (map->y1 + map->sizex) * (map->width + map->posy) * 2
-			- map->width + map->posx < map->width * map->length * 4
+	while (map->x1 + (map->y1 + map->sizex) * map->width * 2
+			- map->width < map->width * map->length * 4
 			&& map->x1 > -map->width
-			&& (map->x1 + (map->y1 + map->sizex + map->posy * 2)
+			&& (map->x1 + (map->y1 + map->sizex)
 			* map->width * 2
 			- map->width) > 0)
 	{
-		addr[map->x1 + (map->y1 + map->sizex + map->posy * 2) * map->width
+		addr[map->x1 + (map->y1 + map->sizex) * map->width
 			* 2 - map->width] = 0x00FFFFFF;
 		if (map->x1 + map->y1 * map->width == map->x2 + map->y2 * map->width)
 			break ;
@@ -97,7 +97,7 @@ void						ft_map_display(t_map *map)
 	if (map->widthx == 0)
 		map->widthx = 1;
 	if (!(map->image = mlx_new_image(map->mlx, map->width * 2,
-					(map->length + map->posy) * 2)))
+					map->length * 2)))
 		return ;
 	map->addr = mlx_get_data_addr(map->image, &map->bpp,
 			&map->size_line, &map->endian);
