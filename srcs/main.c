@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/08 04:10:46 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/09 18:18:19 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		ft_set_values(t_map *map)
 	map->sizey = 0;
 	map->mlx = mlx_init();
 	map->zoom = 2;
-	map->zratio = 2;
+	map->zratio = 1;
 	map->win = mlx_new_window(map->mlx, map->width * 2,
 			map->length * 2, "FdF");
 }
