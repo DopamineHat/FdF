@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/14 04:42:02 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/14 13:19:51 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int				main(int argc, char **argv)
 		ft_putstr_fd("FdF: invalid arguments.\n", 2);
 		return (1);
 	}
+	if (open(argv[1], O_DIRECTORY) >= 0)
+		return (1);
 	if (!(map = (t_map*)malloc(sizeof(t_map))))
 		return (1);
 	if (open(argv[1], O_RDONLY) < 0)

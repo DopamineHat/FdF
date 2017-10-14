@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 10:13:58 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/08 04:11:03 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/14 13:32:55 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_map	*ft_set_sizex(t_map *map, int i)
 	{
 		map->error = 1;
 		ft_putstr_fd("FdF : wrong file format. \n", 2);
+		exit (1);
 	}
 	map->sizex = i;
 	return (map);
@@ -31,7 +32,11 @@ static	void	atoi_tab(char **tab, t_map *map)
 	n = 0;
 	i = 0;
 	while (tab[n])
+	{
+		if (tab[n][0] > '9' || tab[n][0] > '0')
+			exit (1);
 		++n;
+	}
 	while (tab[i])
 	{
 		map->data[map->sizey * n + i] = ft_atoi(tab[i]);
