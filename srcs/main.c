@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 12:11:46 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/14 14:02:15 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/14 14:12:30 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		ft_set_values(t_map *map, char *str)
 	map->sizey = 0;
 	map->posx = 0;
 	map->posy = 0;
-	map->width = 1000;
+	map->width = 600;
 	map->length = 600;
 	map->xn = 1;
 	map->yn = 1;
