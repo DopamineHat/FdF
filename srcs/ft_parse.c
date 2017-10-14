@@ -6,7 +6,7 @@
 /*   By: rpagot <rpagot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/12 10:13:58 by rpagot            #+#    #+#             */
-/*   Updated: 2017/10/14 13:32:55 by rpagot           ###   ########.fr       */
+/*   Updated: 2017/10/14 14:11:14 by rpagot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ static	void	atoi_tab(char **tab, t_map *map)
 	n = 0;
 	i = 0;
 	while (tab[n])
-	{
-		if (tab[n][0] > '9' || tab[n][0] > '0')
-			exit (1);
 		++n;
-	}
 	while (tab[i])
 	{
 		map->data[map->sizey * n + i] = ft_atoi(tab[i]);
